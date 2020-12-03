@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glyxybxhtxt.dao.ShyMapper" >
+  <resultMap id="BaseResultMap" type="com.glyxybxhtxt.dataObject.Shy" >
+    <id column="ybid" property="ybid" jdbcType="VARCHAR" />
+    <result column="gh" property="gh" jdbcType="VARCHAR" />
+    <result column="xm" property="xm" jdbcType="VARCHAR" />
+    <result column="zw" property="zw" jdbcType="INTEGER" />
+    <result column="xq" property="xq" jdbcType="VARCHAR" />
+    <result column="x" property="x" jdbcType="VARCHAR" />
+    <result column="y" property="y" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ybid, gh, xm, zw, xq, x, y
+  </sql>
+  <select id="selallshy" resultMap="BaseResultMap">
+ 	select 
+    <include refid="Base_Column_List" />
+    from shy
+  </select>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from shy
+    where ybid = #{ybid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from shy
+    where ybid = #{ybid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.glyxybxhtxt.dataObject.Shy" >
+    insert into shy (ybid, gh, xm, 
+      zw, xq, x, y
+      )
+    values (#{ybid,jdbcType=VARCHAR}, #{gh,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, 
+      #{zw,jdbcType=INTEGER}, #{xq,jdbcType=VARCHAR}, #{x,jdbcType=VARCHAR}, #{y,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.glyxybxhtxt.dataObject.Shy" >
+    insert into shy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ybid != null" >
+        ybid,
+      </if>
+      <if test="gh != null" >
+        gh,
+      </if>
+      <if test="xm != null" >
+        xm,
+      </if>
+      <if test="zw != null" >
+        zw,
+      </if>
+      <!-- <if test="xq != null" >
+        xq,
+      </if>
+      <if test="x != null" >
+        x,
+      </if>
+      <if test="y != null" >
+        y,
+      </if> -->
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ybid != null" >
+        #{ybid,jdbcType=VARCHAR},
+      </if>
+      <if test="gh != null" >
+        #{gh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="zw != null" >
+        #{zw,jdbcType=INTEGER},
+      </if>
+      <!-- <if test="xq != null" >
+        #{xq,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null" >
+        #{y,jdbcType=VARCHAR},
+      </if> -->
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glyxybxhtxt.dataObject.Shy" >
+    update shy
+    <set >
+      <if test="xm != null" >
+        xm = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="zw != null" >
+        zw = #{zw,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ybid = #{ybid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glyxybxhtxt.dataObject.Shy" >
+    update shy
+    set gh = #{gh,jdbcType=VARCHAR},
+      xm = #{xm,jdbcType=VARCHAR},
+      zw = #{zw,jdbcType=INTEGER},
+      xq = #{xq,jdbcType=VARCHAR},
+      x = #{x,jdbcType=VARCHAR},
+      y = #{y,jdbcType=VARCHAR}
+    where ybid = #{ybid,jdbcType=VARCHAR}
+  </update>
+</mapper>

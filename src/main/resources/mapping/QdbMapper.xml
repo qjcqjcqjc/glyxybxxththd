@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glyxybxhtxt.dao.QdbMapper" >
+  <resultMap id="BaseResultMap" type="com.glyxybxhtxt.dataObject.Qdb" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="qdsj" property="qdsj" jdbcType="TIMESTAMP" />
+    <result column="shyid" property="shyid" jdbcType="VARCHAR" />
+    <result column="xq" property="xq" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, qdsj, shyid, xq,state
+  </sql>
+  <select id="selqdb" resultMap="BaseResultMap" parameterType="com.glyxybxhtxt.dataObject.Qdb">
+  	select 
+    *
+    from qdb 
+    where shyid = #{shyid,jdbcType=VARCHAR}     ORDER BY qdsj desc 
+    	LIMIT #{state,jdbcType=INTEGER},#{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from qdb
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from qdb
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="qd" parameterType="com.glyxybxhtxt.dataObject.Qdb" >
+    insert into qdb (shyid,xq,state)
+    values ( #{shyid,jdbcType=VARCHAR}, 
+      #{xq,jdbcType=VARCHAR},
+      #{state,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insert" parameterType="com.glyxybxhtxt.dataObject.Qdb" >
+    insert into qdb (id, qdsj, shyid, 
+      xq)
+    values (#{id,jdbcType=INTEGER}, #{qdsj,jdbcType=TIMESTAMP}, #{shyid,jdbcType=VARCHAR}, 
+      #{xq,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glyxybxhtxt.dataObject.Qdb" >
+    insert into qdb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="qdsj != null" >
+        qdsj,
+      </if>
+      <if test="shyid != null" >
+        shyid,
+      </if>
+      <if test="xq != null" >
+        xq,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="qdsj != null" >
+        #{qdsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shyid != null" >
+        #{shyid,jdbcType=VARCHAR},
+      </if>
+      <if test="xq != null" >
+        #{xq,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glyxybxhtxt.dataObject.Qdb" >
+    update qdb
+    <set >
+      <if test="qdsj != null" >
+        qdsj = #{qdsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shyid != null" >
+        shyid = #{shyid,jdbcType=VARCHAR},
+      </if>
+      <if test="xq != null" >
+        xq = #{xq,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glyxybxhtxt.dataObject.Qdb" >
+    update qdb
+    set qdsj = #{qdsj,jdbcType=TIMESTAMP},
+      shyid = #{shyid,jdbcType=VARCHAR},
+      xq = #{xq,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

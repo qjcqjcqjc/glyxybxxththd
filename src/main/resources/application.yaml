@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: glyxybxxt
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.115.177.141:3306/glmc?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root1234
+    type: com.alibaba.druid.pool.DruidDataSource
+  devtools:
+    restart:
+      enabled: false
+
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.glyxybxhtxt.dataobject
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+
+

@@ -1,0 +1,99 @@
+package com.glyxybxhtxt.dataObject;
+
+public class Jdr {
+    private String ybid;
+
+    private String gh;
+
+    private String xm;
+
+    private String sj;
+
+    private String yx;
+
+    private String state;
+    private String ywfw;
+    private int zjds;
+    private int dqds;
+    private int pjpj;
+    
+	public int getZjds() {
+		return zjds;
+	}
+
+	public void setZjds(int zjds) {
+		this.zjds = zjds;
+	}
+
+	public int getDqds() {
+		return dqds;
+	}
+
+	public void setDqds(int dqds) {
+		this.dqds = dqds;
+	}
+
+	public int getPjpj() {
+		return pjpj;
+	}
+
+	public void setPjpj(int pjpj) {
+		this.pjpj = pjpj;
+	}
+
+	public String getYwfw() {
+		return ywfw;
+	}
+
+	public void setYwfw(String ywfw) {
+		this.ywfw = ywfw;
+	}
+
+	public String getYbid() {
+        return ybid;
+    }
+
+    public void setYbid(String ybid) {
+        this.ybid = ybid == null ? null : ybid.trim();
+    }
+
+    public String getGh() {
+        return gh;
+    }
+
+    public void setGh(String gh) {
+        this.gh = gh == null ? null : gh.trim();
+    }
+
+    public String getXm() {
+        return xm;
+    }
+
+    public void setXm(String xm) {
+        this.xm = xm == null ? null : xm.trim();
+    }
+
+    public String getSj() {
+        return sj;
+    }
+
+    public void setSj(String sj) {
+        this.sj = sj == null ? null : sj.trim();
+    }
+
+    public String getYx() {
+        return yx;
+    }
+
+    public void setYx(String yx) {
+        this.yx = yx == null ? null : yx.trim();
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
+    }
+}

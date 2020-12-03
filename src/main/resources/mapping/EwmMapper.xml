@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glyxybxhtxt.dao.EwmMapper" >
+  <resultMap id="BaseResultMap" type="com.glyxybxhtxt.dataObject.Ewm" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="qid" property="qid" jdbcType="INTEGER" />
+    <result column="xxdd" property="xxdd" jdbcType="VARCHAR" />
+    <association property="qy" javaType="com.glyxybxhtxt.dataObject.Bxqy">
+    	<result column="qylb" property="qylb" jdbcType="VARCHAR" />
+    	<result column="qy" property="qy" jdbcType="VARCHAR" />
+    	<result column="xq" property="xq" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, qid, xxdd
+  </sql>
+  
+  <select id="selewm" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  	 select 
+    <include refid="Base_Column_List" />
+    from ewm
+    where qid =  #{qid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selqyid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+   <include refid="Base_Column_List" />
+    from ewm
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selqybysbr" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+   select 
+   e.*,q.qylb,q.xq,q.qy
+    from ewm e,bxqy q
+    where e.id = #{id,jdbcType=INTEGER} and e.qid = q.id
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ewm
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ewm
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.glyxybxhtxt.dataObject.Ewm" >
+    insert into ewm (qid, xxdd
+      )
+    values ( #{qid,jdbcType=INTEGER}, #{xxdd,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.glyxybxhtxt.dataObject.Ewm" >
+    insert into ewm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="qid != null" >
+        qid,
+      </if>
+      <if test="xxdd != null" >
+        xxdd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="qid != null" >
+        #{qid,jdbcType=INTEGER},
+      </if>
+      <if test="xxdd != null" >
+        #{xxdd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glyxybxhtxt.dataObject.Ewm" >
+    update ewm
+    <set >
+      <if test="qid != null" >
+        qid = #{qid,jdbcType=INTEGER},
+      </if>
+      <if test="xxdd != null" >
+        xxdd = #{xxdd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glyxybxhtxt.dataObject.Ewm" >
+    update ewm
+    set qid = #{qid,jdbcType=INTEGER},
+      xxdd = #{xxdd,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

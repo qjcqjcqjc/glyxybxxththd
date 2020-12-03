@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glyxybxhtxt.dao.JdrMapper" >
+  <resultMap id="BaseResultMap" type="com.glyxybxhtxt.dataObject.Jdr" >
+    <id column="ybid" property="ybid" jdbcType="VARCHAR" />
+    <result column="gh" property="gh" jdbcType="VARCHAR" />
+    <result column="xm" property="xm" jdbcType="VARCHAR" />
+    <result column="sj" property="sj" jdbcType="VARCHAR" />
+    <result column="yx" property="yx" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="zjds" property="zjds" jdbcType="INTEGER" />
+    <result column="ywfw" property="ywfw" jdbcType="VARCHAR" />
+    <result column="dqds" property="dqds" jdbcType="INTEGER" />
+    <result column="pjpj" property="pjpj" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ybid, gh, xm, sj, yx, state,ywfw
+  </sql>
+
+  <select id="seljdrforpd" resultMap="BaseResultMap" >
+   select x.ybid,x.ywfw,y.c state from jdr x
+	LEFT JOIN (select count(ybid) c,ybid from jdr j,bxd b where j.ybid = b.jid and j.state = 1 and TO_DAYS(b.sbsj)=TO_DAYS(now())  GROUP BY ybid) y
+	on x.ybid = y.ybid
+	order by state
+  </select>
+  <select id="selallJdr" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select j.*,dqds,zjds,pjpj from jdr j
+    LEFT JOIN
+    (
+    select * from
+    (select count(b.id) dqds,j.ybid did from bxd b,jdr j where b.jid = j.ybid and (b.state = 1 or b.state = 2) GROUP BY j.ybid) d,
+    (select count(b.id) zjds,j.ybid zid from bxd b,jdr j where b.jid = j.ybid and b.state != 4 GROUP BY j.ybid) z,
+    (select floor(AVG(b.pj))  pjpj,j.ybid aid from bxd b,jdr j where b.jid = j.ybid GROUP BY j.ybid) a
+    ) x
+    on j.ybid = x.did and j.ybid = x.zid and j.ybid = x.aid
+    <if test="state != null">
+      where j.state = #{state,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from jdr
+    where ybid = #{ybid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from jdr
+    where ybid = #{ybid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.glyxybxhtxt.dataObject.Jdr" >
+    insert into jdr (ybid, gh, xm,
+      sj, yx, state)
+    values (#{ybid,jdbcType=VARCHAR}, #{gh,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR},
+      #{sj,jdbcType=VARCHAR}, #{yx,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glyxybxhtxt.dataObject.Jdr" >
+    insert into jdr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ybid != null" >
+        ybid,
+      </if>
+      <if test="gh != null" >
+        gh,
+      </if>
+      <if test="xm != null" >
+        xm,
+      </if>
+      <if test="sj != null" >
+        sj,
+      </if>
+      <if test="yx != null" >
+        yx,
+      </if>
+      <if test="ywfw != null" >
+        ywfw,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ybid != null" >
+        #{ybid,jdbcType=VARCHAR},
+      </if>
+      <if test="gh != null" >
+        #{gh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        #{sj,jdbcType=VARCHAR},
+      </if>
+      <if test="yx != null" >
+        #{yx,jdbcType=VARCHAR},
+      </if>
+      <if test="ywfw != null" >
+        #{ywfw,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glyxybxhtxt.dataObject.Jdr" >
+    update jdr
+    <set >
+      <if test="xm != null" >
+        xm = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        sj = #{sj,jdbcType=VARCHAR},
+      </if>
+      <if test="yx != null" >
+        yx = #{yx,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="ywfw != null" >
+        ywfw = #{ywfw,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ybid = #{ybid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glyxybxhtxt.dataObject.Jdr" >
+    update jdr
+    set gh = #{gh,jdbcType=VARCHAR},
+      xm = #{xm,jdbcType=VARCHAR},
+      sj = #{sj,jdbcType=VARCHAR},
+      yx = #{yx,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where ybid = #{ybid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glyxybxhtxt.dao.BxqyMapper" >
+  <resultMap id="BaseResultMap" type="com.glyxybxhtxt.dataObject.Bxqy" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="qy" property="qy" jdbcType="VARCHAR" />
+    <result column="qylb" property="qylb" jdbcType="VARCHAR" />
+    <result column="xq" property="xq" jdbcType="VARCHAR" />
+    <result column="x" property="x" jdbcType="VARCHAR" />
+    <result column="y" property="y" jdbcType="VARCHAR" />
+    <collection property="b" javaType="List" ofType="com.glyxybxhtxt.dataObject.Bxd">
+	    <id column="bid" property="id" jdbcType="INTEGER" />
+	    <result column="xxdd" property="xxdd" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="ewm" javaType="List" ofType="com.glyxybxhtxt.dataObject.Ewm">
+	    <id column="eid" property="id" jdbcType="INTEGER" />
+	    <result column="exxdd" property="xxdd" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, qy, qylb, xq,x,y
+  </sql>
+  <select id="selallqy" resultMap="BaseResultMap">
+  select  
+    <include refid="Base_Column_List" /> 
+    from bxqy 
+  </select>
+  
+  <select id="ditu" resultMap="BaseResultMap" parameterType="String">
+  	select q.*,b.id bid,b.xxdd from bxqy q 
+  	LEFT JOIN ewm e  on e.qid = q.id
+	LEFT JOIN bxd b 
+	on b.eid = e.id and (b.state=1  or b.state=0) 
+	where q.xq = #{xq,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bxqy
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bxqy
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.glyxybxhtxt.dataObject.Bxqy" >
+    insert into bxqy ( qy, qylb, 
+      xq,x,y)
+    values ( #{qy,jdbcType=VARCHAR}, #{qylb,jdbcType=VARCHAR}, 
+      #{xq,jdbcType=VARCHAR},#{x,jdbcType=VARCHAR},#{y,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glyxybxhtxt.dataObject.Bxqy" >
+    insert into bxqy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="qy != null" >
+        qy,
+      </if>
+      <if test="qylb != null" >
+        qylb,
+      </if>
+      <if test="xq != null" >
+        xq,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="qy != null" >
+        #{qy,jdbcType=VARCHAR},
+      </if>
+      <if test="qylb != null" >
+        #{qylb,jdbcType=VARCHAR},
+      </if>
+      <if test="xq != null" >
+        #{xq,jdbcType=VARCHAR},
+      </if>
+     
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glyxybxhtxt.dataObject.Bxqy" >
+    update bxqy
+    <set >
+      <if test="qy != null" >
+        qy = #{qy,jdbcType=VARCHAR},
+      </if>
+      <if test="qylb != null" >
+        qylb = #{qylb,jdbcType=VARCHAR},
+      </if>
+      <if test="xq != null" >
+        xq = #{xq,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        x = #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null" >
+        y = #{y,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glyxybxhtxt.dataObject.Bxqy" >
+    update bxqy
+    set qy = #{qy,jdbcType=VARCHAR},
+      qylb = #{qylb,jdbcType=VARCHAR},
+      xq = #{xq,jdbcType=VARCHAR}
+     
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
