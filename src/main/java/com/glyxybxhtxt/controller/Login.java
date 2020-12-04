@@ -34,11 +34,11 @@ public class Login {
                 System.out.println(xm);
                 int sf = s.getsf(rm.getM().getId());
                 if(eid!=null)
-                    //response.sendRedirect("http://localhost/bx/bxqt/#/index?xm="+xm+"&xh="+rm.getSid()+"&head="+rm.getM().getHead()+"&sf="+sf+"&ybid="+rm.getM().getId()+"&eid="+eid);
-                    response.sendRedirect("https://yiban.glmc.edu.cn/bxqt/#/index?xm="+xm+"&xh="+rm.getSid()+"&head="+rm.getM().getHead()+"&sf="+sf+"&ybid="+rm.getM().getId()+"&eid="+eid);
+                    response.sendRedirect("http://localhost/bx/bxqt/#/index?xm="+xm+"&xh="+rm.getSid()+"&head="+rm.getM().getHead()+"&sf="+sf+"&ybid="+rm.getM().getId()+"&eid="+eid);
+//                    response.sendRedirect("https://yiban.glmc.edu.cn/bxqt/#/index?xm="+xm+"&xh="+rm.getSid()+"&head="+rm.getM().getHead()+"&sf="+sf+"&ybid="+rm.getM().getId()+"&eid="+eid);
                 else
-                    //response.sendRedirect("http://localhost/bx/bxqt/#/index?xm="+xm+"&xh="+rm.getSid()+"&head="+rm.getM().getHead()+"&sf="+sf+"&ybid="+rm.getM().getId());
-                    response.sendRedirect("https://yiban.glmc.edu.cn/bxqt/#/index?xm="+xm+"&xh="+rm.getSid()+"&head="+rm.getM().getHead()+"&sf="+sf+"&ybid="+rm.getM().getId());
+                    response.sendRedirect("http://localhost/bx/bxqt/#/index?xm="+xm+"&xh="+rm.getSid()+"&head="+rm.getM().getHead()+"&sf="+sf+"&ybid="+rm.getM().getId());
+//                    response.sendRedirect("https://yiban.glmc.edu.cn/bxqt/#/index?xm="+xm+"&xh="+rm.getSid()+"&head="+rm.getM().getHead()+"&sf="+sf+"&ybid="+rm.getM().getId());
             }
         }catch(Exception e){
             e.printStackTrace();
