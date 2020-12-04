@@ -1,6 +1,5 @@
 package com.glyxybxhtxt.dataObject;
 
-import cn.edu.glmc.yiban.bxqy.dao.vo.Bxqy;
 
 public class Ewm {
     private Integer id;

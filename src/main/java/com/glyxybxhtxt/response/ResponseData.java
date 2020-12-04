@@ -24,16 +24,22 @@ public class ResponseData implements Serializable {
         this.obj = obj;
     }
 
-    public ResponseData(boolean sucOrFal){
-        this.status = sucOrFal ? "success" : "false";
+    public ResponseData(String status, String info){
+        this.status = status;
+        this.info = info;
+    }
+
+    public ResponseData(boolean isSuccess){
+        this.status = isSuccess ? "success" : "false";
     }
 
     /**
-     * è¿”å›é”™è¯¯ä¿¡æ¯infoç»Ÿä¸€ä¸ºï¼š
-     * 0æœªç™»å½•æˆæƒè¯·ç™»å½•ï¼Œ
-     * 1ç¨‹åºé”™è¯¯è¯·åˆ·æ–°ï¼Œ
-     * 2æ— æ•ˆå‚æ•°ï¼Œ
-     * 3ç¼ºå°‘ä¼ é€’å¿…è¦å‚æ•°
+     * ·µ»Ø´íÎóĞÅÏ¢infoÍ³Ò»Îª£º
+     * 0Î´µÇÂ¼ÊÚÈ¨ÇëµÇÂ¼£¬
+     * 1³ÌĞò´íÎóÇëË¢ĞÂ£¬
+     * 2ÎŞĞ§²ÎÊı£¬
+     * 3È±ÉÙ´«µİ±ØÒª²ÎÊı
+     * ÆäÓàµÄinfo¾Í×Ô¼º¶¨Òå
      * @param info
      */
     public ResponseData(String info){

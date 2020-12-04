@@ -2,8 +2,6 @@ package com.glyxybxhtxt.dataObject;
 
 import java.util.List;
 
-import cn.edu.glmc.yiban.bxd.dao.vo.Bxd;
-import cn.edu.glmc.yiban.ewm.dao.vo.Ewm;
 
 public class Bxqy {
     private Integer id;
